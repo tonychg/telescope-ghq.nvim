@@ -133,8 +133,8 @@ M.list = function(opts)
           local entry = actions_state.get_selected_entry()
           local dir = from_entry.path(entry)
           if type == "default" then
-            require("telescope.builtin").git_files { cwd = dir }
-            return
+            vim.cmd("tcd " .. dir)
+            print("tchdir to " .. dir)
           end
           actions.close(prompt_bufnr)
           if type == "horizontal" then
@@ -144,6 +144,7 @@ M.list = function(opts)
             vim.cmd("lcd " .. dir)
             print("lchdir to " .. dir)
           elseif type == "tab" then
+            vim.cmd("tabnew " .. dir)
             vim.cmd("tcd " .. dir)
             print("tchdir to " .. dir)
           end
